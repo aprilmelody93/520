@@ -1,0 +1,36 @@
+<p>Input:<br><textarea id="input" rows="10" cols="80"></textarea>
+<p><button onclick="process()">Process</button>
+<p>Output:<br><textarea id="output" rows="10" cols="80"></textarea>
+
+<script>
+
+function process() {
+  let userInput = document.getElementById("input").value;
+  let insertPipe = userInput.replace(/(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=[.!?()&])\s/gm, "| ")
+  let allBoundaries = insertPipe.split(" ")
+ 
+ let string = "";
+  	for (let i = 0; i < allBoundaries.length - 1; i++) {
+		let thisBoundary = {};
+		thisBoundary.word = allBoundaries[i];
+		string += thisBoundary.word + ", ";
+				if(thisBoundary.word.includes("|")) {
+					thisBoundary.pipe = 1;
+				} else {
+					thisBoundary.pipe = 0;
+				}
+				string += thisBoundary.pipe + "\n";
+
+				allBoundaries[i] = thisBoundary;
+				
+	}
+
+
+
+
+
+
+  document.getElementById("output").value = string;
+	}
+
+</script>
